@@ -1,5 +1,5 @@
 <?php 
-$origin = "../../htdocs";
+$origin = dirname(__DIR__);
 if ($_SERVER['REQUEST_METHOD'] === "GET") :
 session_start();
 if (isset($_SESSION["qr-admin"]) && $_SESSION["qr-admin"] === true) {?>
