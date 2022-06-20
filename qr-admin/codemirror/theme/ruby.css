@@ -1,0 +1,33 @@
+.cm-s-ruby.CodeMirror { background: hsl(var(--theme-color), 38%, 12%); color: hsl(0, 0%, 88%); --generalcolor: rgba(255, 0, 0); }
+.cm-s-ruby div.CodeMirror-selected { background: hsl(var(--theme-color), 12%, 24%); }
+.cm-s-ruby.CodeMirror-focused div.CodeMirror-selected { background: hsl(calc(var(--theme-color) - 210 + 180), 62%, 24%); }
+.cm-s-ruby .CodeMirror-gutters { background: hsl(var(--theme-color), 24%, 12%); border-right: 1px solid #aaa; }
+.cm-s-ruby .CodeMirror-guttermarker { color: white; }
+.cm-s-ruby .CodeMirror-guttermarker-subtle { color: #d0d0d0; }
+.cm-s-ruby .CodeMirror-linenumber { color: #d0d0d0; }
+.cm-s-ruby .CodeMirror-cursor { border-left: 1px solid white; }
+
+.cm-s-ruby span.cm-quote      { color: hsl(0, 0%, 62%); }
+.cm-s-ruby span.cm-atom       { color: hsl(90, 88%, 62%); }
+.cm-s-ruby span.cm-attribute  { color: hsl(180, 88%, 62%); }
+.cm-s-ruby span.cm-bracket.cm-bracket { color: hsl(0, 0%, 62%); }
+.cm-s-ruby span.cm-builtin    { color: hsl(90, 88%, 62%); }
+.cm-s-ruby span.cm-comment    { color: hsl(0, 0%, 62%); }
+.cm-s-ruby span.cm-def        { color: hsl(150, 88%, 62%); }
+.cm-s-ruby span.cm-keyword    { color: hsl(300, 88%, 62%); }
+.cm-s-ruby span.cm-meta       { color: hsl(0, 0%, 62%); }
+.cm-s-ruby span.cm-number     { color: hsl(90, 88%, 62%); }
+.cm-s-ruby span.cm-operator   { color: hsl(60, 88%, 62%); }
+.cm-s-ruby span.cm-property   { color: hsl(180, 88%, 62%); }
+.cm-s-ruby span.cm-qualifier  { color: hsl(90, 88%, 62%); }
+.cm-s-ruby span.cm-special    { color: hsl(30, 88%, 62%); }
+.cm-s-ruby span.cm-string     { color: hsl(30, 88%, 62%); }
+.cm-s-ruby span.cm-string-2   { color: hsl(0, 88%, 62%); }
+.cm-s-ruby span.cm-tag        { color: hsl(210, 88%, 62%); }
+.cm-s-ruby span.cm-variable   { color: hsl(330, 88%, 62%); }
+.cm-s-ruby span.cm-variable-2 { color: hsl(150, 88%, 62%); }
+.cm-s-ruby span.cm-variable-3, .cm-s-ruby span.cm-type { color: hsl(90, 88%, 62%); }
+.cm-s-ruby span.cm-error      { color: hsl(0, 100%, 50%); }
+
+.cm-s-ruby .CodeMirror-activeline-background { background: hsl(var(--theme-color), 62%, 18%); }
+.cm-s-ruby .CodeMirror-matchingbracket { outline:1px solid hsl(0, 0%, 50%); color: hsl(0, 0%, 100%) !important; }
