@@ -82,11 +82,10 @@ if (isset($_SESSION["qr-admin"]) && $_SESSION["qr-admin"] === true) {?>
     <script src="codemirror/addon/display/placeholder.js"></script>
     <script src="codemirror/addon/display/rulers.js"></script>
     <script src="codemirror/addon/dialog/dialog.js"></script>
-    <script src="codemirror/addon/search/jump-to-line.js"></script><?php $preDir = $origin . "/" . basename(__DIR__) . "/"; echo "\n";?>
-    <script defer="defer" src="<?php echo str_replace($preDir, "", glob($preDir . "static/js/*.js")[0])?>"></script>
-    <link href="<?php echo str_replace($preDir, "", glob($preDir . "static/css/*.css")[0])?>" rel="stylesheet">
+    <script src="codemirror/addon/search/jump-to-line.js"></script>
+    <link rel="stylesheet" href="misc/quickrender.css">
+    <script defer src="misc/quickrender.js"></script>
   </head>
-  <body id="root"></body>
 </html><?php } else {?>
 <!DOCTYPE html>
 <html lang="en-US">
