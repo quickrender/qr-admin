@@ -1,0 +1,525 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0px;
+  height: 100vh;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+#root {
+  height: 100%;
+}
+#topNav {
+  background-color: hsl(var(--theme-color), 50%, 18%);
+  height: 36px;
+  position: fixed;
+  top: 0px;
+  left: 225px;
+  width: calc(100% - 225px);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.fullscreen #topNav {
+  left: 48px;
+  width: calc(100% - 48px);
+}
+#topNav::-webkit-scrollbar {
+  display: none;
+}
+#topNav a {
+  text-decoration: none;
+  color: hsl(0, 0%, 74%);
+}
+.fp {
+  position: relative;
+  height: 100%;
+  display: inline-block;
+  line-height: 36px;
+  margin-right: 1px;
+  background-color: hsl(var(--theme-color), 38%, 24%);
+  padding: 0px 32px 0px 16px;
+}
+.fp > i {
+  font-size: 1.3rem;
+  color: inherit;
+  position: absolute;
+  right: 8px;
+  top: calc(50% - 8px);
+  line-height: 16px;
+  display: none;
+  width: 16px;
+  height: 16px;
+  text-indent: 0.75px;
+  border-radius: 3px;
+}
+.unsaved:before {
+  content: "*";
+  height: 0px;
+  display: inline-block;
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  font-size: 1.5rem;
+}
+.unmounted {
+  font-style: oblique;
+}
+.fp > i:hover {
+  background-color: hsl(0, 0%, 38%);
+}
+.fp:hover > i {
+  display: block;
+}
+.opened-fp {
+  background-color: hsl(var(--theme-color), 62%, 12%);
+  color: white !important;
+}
+.opened-fp > i {
+  display: block;
+}
+#sideNav {
+  user-select: none;
+  width: 225px;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: hsl(var(--theme-color), 62%, 18%);
+  z-index: 2;
+  padding-top: 36px;
+  box-shadow: 2px 0px 3px rgba(0, 0, 0, 0.3);
+}
+.fullscreen #sideNav {
+  display: none;
+}
+nav {
+  line-height: 0px;
+  height: 100%;
+  position: relative;
+}
+nav > .fd {
+  position: relative;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  z-index: 1;
+}
+nav > .fb {
+  max-height: calc(100% - 24px - 24px);
+  overflow-y: scroll;
+}
+nav > .fb::-webkit-scrollbar {
+  display: none;
+}
+#sideNav a {
+  background-color: hsl(var(--theme-color), 62%, 18%);
+  width: 100%;
+  text-decoration: none;
+  height: 24px;
+  font-size: 0.85rem;
+  line-height: 24px;
+  display: inline-block;
+  padding-left: 8px;
+  color: hsl(0, 0%, 88%);
+  white-space: nowrap;
+}
+#sideNav a:focus {
+  outline: hsl(var(--theme-color), 88%, 62%) solid 1px;
+  outline-offset: -1px;
+}
+#sideNav a:not(.selected-f, #sideNav a:focus):hover {
+  filter: brightness(138%);
+}
+.fd {
+  position: relative;
+}
+.fd::before {
+  content: "\276F";
+  display: inline-block;
+  text-align: center;
+  width: 16px;
+  font-size: 0.8rem;
+  font-weight: normal;
+  text-indent: -8px;
+  position: absolute;
+  left: var(--signLeft);
+  line-height: 24px;
+}
+.dragged-f:before {
+  content: "";
+}
+.opened-fd::before {
+  writing-mode: vertical-rl;
+  text-indent: -2px;
+  height: 24px;
+}
+.fd + div {
+	display: none;
+}
+.selected-f {
+  background-color: hsl(var(--theme-color), 38%, 24%) !important;
+}
+.sideNavOnFocus .selected-f {
+  background-color: hsla(var(--theme-color), 62%, 38%, 0.5) !important;
+}
+#content {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  height: calc(100% - 36px);
+  width: calc(100% - 225px);
+  --areaWidth: 50%;
+  user-select: none;
+  white-space: nowrap;
+}
+.fullscreen #content {
+  width: 100%;
+}
+#panel {
+  background-color: hsl(var(--theme-color), 38%, 18%);
+  height: 24px;
+  width: calc(var(--areaWidth));
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  padding-left: 8px;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+}
+#panel > select {
+  position: absolute;
+  top: 2px;
+  left: 8px;
+  height: inherit;
+  outline: none;
+  border: none;
+  width: 70px;
+  border-radius: 3px;
+  text-overflow: ellipsis;
+  height: 20px;
+  background-color: inherit;
+  color: hsl(0, 0%, 88%);
+}
+#panel > select::-webkit-scrollbar {
+  width: 8px;
+  height: 0px;
+}
+#panel > select::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--theme-color), 12%, 38%);
+}
+#panel > select::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+#codeWrapper {
+  background-color: hsl(var(--theme-color), 24%, 12%);
+  height: calc(100% - 24px);
+  width: calc(var(--areaWidth) - 8px);
+  display: inline-block;
+  margin-top: 24px;
+}
+#codeContainer {
+  height: 100%;
+}
+#codeContainer > div:not(:last-child) {
+  display: none;
+}
+#codeContainer > div:last-child {
+  height: 100%;
+}
+#dragbar {
+  height: calc(100%);
+  background-color: hsl(var(--theme-color), 38%, 18%);
+  width: 8px;
+  display: inline-block;
+  position: relative;
+  z-index: 4;
+  box-shadow: 2px 0px 3px rgba(0, 0, 0, 0.2);
+}
+#dragbar > span {
+  margin-top: 24px;
+  height: calc(100% - 24px);
+  box-shadow: -2px 3px 3px rgba(0, 0, 0, 0.3);
+  display: block;
+}
+#searchbar {
+  position: absolute;
+  height: 24px;
+  width: calc(100% - var(--areaWidth));
+  top: 0px;
+  right: 0px;
+  background-color: hsl(0, 0%, 88%);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  text-align: center;
+}
+#searchbar > input {
+  outline: none;
+  border: none;
+  height: 20px;
+  vertical-align: 1px;
+  border-radius: 3px;
+  width: calc(100% - 80px);
+  margin: 0px 2px;
+  padding-right: 20px;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+#searchbar > svg {
+  height: 16px;
+  width: 16px;
+  vertical-align: middle;
+  color: hsl(0, 0%, 38%);
+  position: relative;
+  margin-left: -20px;
+  top: -1px;
+}
+#iframeWrapper {
+  background-color: hsl(0, 0%, 97%);
+  height: calc(100% - 24px);
+  width: calc(100% - var(--areaWidth));
+  display: inline-block;
+  margin-top: 24px;
+  position: relative;
+  z-index: 2;
+  vertical-align: top;
+}
+#iframeWrapper > iframe {
+  height: 100%;
+  width: 100%;
+  border: none;
+  display: none;
+}
+#overlay {
+  height: 100%;
+  width: calc(100% - var(--areaWidth));
+  top: 0px;
+  right: 0px;
+  position: absolute;
+  z-index: 4;
+  display: none;
+}
+.barTrackY {
+  height: calc(100% - 24px - 24px);
+  width: 8px;
+  position: absolute;
+  right: 0px;
+  top: 24px;
+}
+.scrollBarY {
+  background-color: hsla(var(--theme-color), 24%, 62%, 0.3);
+  width: 100%;
+  position: absolute;
+}
+.barTrackX {
+  width: calc(100% - 225px);
+  height: 4px;
+  position: absolute;
+  right: 0px;
+  top: 32px;
+  z-index: 10;
+}
+.fullscreen .barTrackX {
+  width: calc(100% - 48px);
+}
+.scrollBarX {
+  background-color: hsla(var(--theme-color), 24%, 62%, 0.3);
+  height: 100%;
+  position: absolute;
+}
+#contextMenu {
+  user-select: none;
+  color: hsl(0, 0%, 88%);
+  display: none;
+  position: fixed;
+  width: 110px;
+  background-color: hsl(var(--theme-color), 38%, 24%);
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  z-index: 7;
+}
+.rootContextMenu,
+.fdContextMenu,
+.flContextMenu,
+.zipContextMenu,
+.zipContextMenu > #eFile {
+  display: block !important;
+}
+#eFile,
+.rootContextMenu > #rename, 
+.rootContextMenu > #zFile,
+.rootContextMenu > #dlFile,
+.rootContextMenu > #dFile,
+.flContextMenu > #nFile,
+.flContextMenu > #nFolder,
+.flContextMenu > #ulFile,
+.zipContextMenu > #nFile,
+.zipContextMenu > #nFolder,
+.zipContextMenu > #ulFile,
+.zipContextMenu > #zFile {
+  display: none !important;
+}
+.rootContextMenu > #ulFile {
+  border-bottom: none;
+}
+#contextMenu > span {
+  font-size: 0.8rem;
+  display: inline-block;
+  width: 100%;
+  padding: 4px 8px;
+  border-bottom: hsl(0, 0%, 62%) solid 1px;
+}
+#contextMenu > span:nth-last-child(2) {
+  border-bottom: none;
+}
+#contextMenu > #dlFile {
+  text-decoration: underline;
+}
+#contextMenu > span:last-child {
+  border-top: hsl(0, 62%, 62%) solid 2px;
+  color: hsl(0, 62%, 62%);
+  font-weight: 600;
+  border-bottom: none;
+}
+#contextMenu > span:hover {
+  background-color: hsl(var(--theme-color), 38%, 38%);
+}
+.draggedOnElement, .draggedOnElement * {
+  background-color: hsl(var(--theme-color), 38%, 38%) !important;
+}
+#reset {
+  background-color: hsl(var(--theme-color), 62%, 18%);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 225px;
+  height: 36px;
+  z-index: 2;
+  user-select: none;
+  padding-left: 48px;
+  color: hsl(var(--theme-color) 94% 68%);
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 36px;
+  text-indent: 12px;
+}
+.fullscreen #reset {
+  width: 48px;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+  font-size: 0;
+}
+#reset > button {
+  border: none;
+  width: 48px;
+  height: 36px;
+  position: absolute;
+  left: 0px;
+  padding: 4px 0px 0px 11px;
+  text-align: left;
+  top: 0px;
+  background-color: hsl(var(--theme-color), 62%, 18%);
+  color: var(--theme-color);
+}
+#reset > button > svg {
+  height: 24px;
+  width: 24px;
+}
+#reset > button::before {
+  font-family: dashicons;
+  /*content: "\f448";*/
+  color: hsl(var(--theme-color) 32% 68%);
+  font-size: 20px;
+  line-height: 30px;
+}
+#reset > button:hover {
+  filter: brightness(138%);
+}
+
+/*default*/
+.default #topNav {
+  background-color: hsl(0, 0%, 82%);
+}
+.default #topNav a {
+  color: hsl(0, 0%, 24%);
+  background-color: hsl(0, 0%, 76%);
+}
+.default .fp > i:hover {
+  background-color: hsl(0, 0%, 62%);
+}
+.default .opened-fp {
+  color: black !important;
+  background-color: hsl(0, 0%, 88%) !important;
+}
+.default #sideNav {
+  background-color: hsl(0, 0%, 88%);
+}
+.default #sideNav a {
+  color: hsl(0, 0%, 12%);
+  background-color: hsl(0, 0%, 88%)
+}
+.default #sideNav a:focus {
+  outline: hsl(210, 62%, 38%) solid 1px;
+  outline-offset: -1px;
+}
+.default #sideNav a:not(.selected-f, #sideNav a:focus):hover {
+	filter: brightness(94%) !important;
+}
+.default .selected-f {
+  background-color: hsl(0, 0%, 76%) !important;
+}
+.default .sideNavOnFocus .selected-f {
+  background-color: hsla(210, 12%, 62%, 0.5) !important;
+}
+.default #panel {
+  background-color: hsl(0, 0%, 88%);
+}
+.default #panel > select {
+  color: hsl(0, 0%, 12%);
+}
+.default #panel > select::-webkit-scrollbar-thumb {
+  background-color: hsl(0, 0%, 62%);
+}
+.default #dragbar {
+  background-color: hsl(0, 0%, 88%);
+}
+.default #contextMenu {
+  color: hsl(0, 0%, 12%);
+  background-color: hsl(0, 0%, 88%);
+}
+.default #contextMenu > span:hover {
+  background-color: hsl(0, 0%, 76%);
+}
+.default .draggedOnElement, .default .draggedOnElement * {
+  background-color: hsl(210, 12%, 76%) !important;
+}
+.default .scrollBarY {
+  background-color: hsla(0, 0%, 38%, 0.3);
+}
+.default .scrollBarX {
+  background-color: hsla(0, 0%, 38%, 0.3);
+}
+.default #reset {
+  background-color: hsl(0, 0%, 100%);
+  filter: brightness(88%);
+}
+.default #reset > button:hover {
+  background-color: inherit;
+  filter: brightness(88%);
+}
+
+.satural {
+  --theme-color: 210;
+}
+.emerald {
+  --theme-color: 180;
+}
+.ruby {
+  --theme-color: 330;
+}
