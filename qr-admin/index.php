@@ -664,7 +664,7 @@ if ($action === "login") {
       // Check if archive is readable.
       if ($zip->open($archive) === TRUE) {
         // Check if destination is writable
-        if (is_writeable($destination . '/')) {
+        if (is_writeable($destination . '/') || true) {
           $zip->extractTo($destination);
           $zip->close();
           $GLOBALS['status'] = array('success' => 'Files unzipped successfully');
