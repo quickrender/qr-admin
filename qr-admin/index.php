@@ -86,6 +86,9 @@ if (isset($_SESSION["qr-admin"]) && $_SESSION["qr-admin"] === true) {?>
     <link rel="stylesheet" href="misc/quickrender.css">
     <script defer src="misc/quickrender.js"></script>
   </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html><?php } else {?>
 <!DOCTYPE html>
 <html lang="en-US">
