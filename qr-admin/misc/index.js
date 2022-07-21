@@ -94,7 +94,11 @@ Object.defineProperty(Array.prototype, "forHttp", {value: async function (a) {
   while (true) {
     i++;
     if (i === array.length - 1) {
-      await f(array[i], -1);
+      await f(array[i], -1); 
+      if (document.querySelector("#root.fullscreen")) {
+        await qrApp.syncFiles;
+        setTimeout(() => {queue.state();});
+      }
       i = -1;
     } else {
       f(array[i], i);
@@ -119,6 +123,7 @@ qrApp.folderContent = new Map();
 qrApp.codeArr = JSON.parse(localStorage.getItem("qr-app-code")) ?? new Array();
 qrApp.pageArr = JSON.parse(localStorage.getItem("qr-app-page")) ?? new Array();
 qrApp.pendingDir = new Set();
+qrApp.syncFiles = new $Prom();
 qrApp.fileQueue = new $Queue;
 qrApp.fileArr = function () {
   return Array.from(document.querySelectorAll(".selected-f")).map(function (a) {
@@ -1447,6 +1452,7 @@ window.CodeMirror.defineMode("mustache", function(config, parserConfig) {
             } else {
               a.className = a.className.replace(" fullscreen", "");
               localStorage.removeItem("qr-app-mode");
+              qrApp.syncFiles.state();
             }
           }}
         ><button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
@@ -1737,4 +1743,4 @@ window.CodeMirror.defineMode("mustache", function(config, parserConfig) {
   qrApp.scrollbar(a, window.topNav, "horizontal");
   render(<nav>{await qrApp("", "invoke")}</nav>, window.sideNav);
   qrApp.scrollbar(window.sideNav.querySelector("nav"), window.sideNav.querySelector("nav > .fb"));
-})(document.body);
+})(window.root);
