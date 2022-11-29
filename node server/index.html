@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link rel="icon" href="/qr-admin/misc/favicon.ico"/>
+  <link rel="stylesheet" href="/qr-admin/misc/dashicons.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background-color: hsl(0, 0%, 5%);
+      font-family: sans-serif;
+      font-size: 13px;
+      line-height: 1.4;
+      color: hsl(0, 0%, 88%);
+    }
+    a {
+      color: hsl(0, 0%, 88%);
+      text-decoration: none;
+    }
+    #login {
+      width: 320px;
+      padding: 5% 0 0;
+      margin: auto;
+      user-select: none;
+    }
+    #login h1 a {
+      background-image: url(/qr-admin/misc/logo.svg);
+      background-size: 84px;
+      background-position: center top;
+      background-repeat: no-repeat;
+      height: 84px;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.3;
+      margin: 0 auto 25px;
+      padding: 0;
+      text-decoration: none;
+      width: 84px;
+      text-indent: -9999px;
+      outline: 0;
+      overflow: hidden;
+      display: block;
+    }
+    #login #message {
+      border-left: 4px solid hsla(180, 62%, 38%);
+      padding: 12px;
+      margin-left: 0;
+      margin-bottom: 20px;
+      background-color: hsla(180, 88%, 50%, 0.38);
+      word-wrap: break-word;
+      display: none;
+    }
+    #message.error {
+      display: block!important;
+      background-color: hsla(330, 88%, 50%, 0.38)!important;
+      border-left: 4px solid hsla(330, 62%, 38%)!important;
+    }
+    #message.success {
+      display: block!important;
+    }
+    #login form {
+      margin-top: 20px;
+      margin-left: 0;
+      padding: 26px 24px 34px;
+      font-weight: 400;
+      overflow: hidden;
+      background: hsla(210, 88%, 50%, 0.38);
+      border: 1px solid hsl(0, 0%, 62%);
+      box-shadow: 0 1px 3px rgb(0 0 0 / 4%);
+    }
+    #login form p {
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+    #login label {
+      font-size: 14px;
+      line-height: 1.5;
+      display: inline-block;
+      margin-bottom: 3px;
+      cursor: pointer;
+    }
+    #login form input {
+      background: hsl(210, 62%, 88%);
+      font-size: 16px;
+      width: 100%;
+      line-height: 1.33333333;
+      border-width: .0625rem;
+      padding: 4px 6px;
+      box-shadow: 0 0 0 transparent;
+      border-radius: 4px;
+      border: 2px inset hsl(0, 0%, 62%);
+      color: hsl(210, 62%, 12%);
+      outline: none;
+    }
+    #login form .username, #login form .password {
+      margin-bottom: 16px;
+    }
+    #login form input:focus {
+      background-color: white;
+      color: black;
+      box-shadow: 0 0 0 1px #fff, 0 0 0 3px hsl(210, 68%, 38%);
+    }
+    #login #password {
+      position: relative;
+    }
+    #user_pass {
+      padding-right: 2.6rem!important;
+    }
+    #user_pass::-ms-reveal {
+      display:none;
+    }
+    #login button {
+      background: 0 0;
+      border: 1px solid transparent;
+      box-shadow: none;
+      font-size: 14px;
+      line-height: 1.8;
+      width: 2.5rem;
+      height: 100%;
+      margin: 0;
+      padding: 5px 9px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: #2271b1;
+      vertical-align: top;
+      border-radius: 4px;
+      background-repeat: no-repeat;
+      background-origin: border-box;
+    }
+    #login button:focus {
+      border: 2px inset hsl(0, 0%, 62%);
+      background-color: white;
+      box-shadow: 0 0 0 1px #fff;
+    }
+    #login button::before {
+      font-family: dashicons;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      font-size: 17.5px;
+      top: 0px;
+      left: 0px;
+    }
+    #login button:focus::before {
+      top: -1px;
+    }
+    #login button.visibility::before {
+      content: "\f177";
+    }
+    #login button.hidden::before {
+      content: "\f530";
+    }
+    #login .forgetmenot {
+      font-weight: 400;
+      margin-top: 0px;
+      float: left;
+      height: 28px;
+    }
+    #login .forgetmenot input:focus {
+      box-shadow: none;
+    }
+    #login .forgetmenot label {
+      line-height: 1.85;
+      vertical-align: top;
+      height: 100%;
+    }
+    #rememberme {
+      border: 1px solid #8c8f94;
+      border-radius: 4px;
+      background: #fff;
+      clear: none;
+      cursor: pointer;
+      display: inline-block;
+      line-height: 0;
+      height: 1rem;
+      margin: 2px 3px 0 0;
+      outline: 0;
+      padding: 0!important;
+      text-align: center;
+      vertical-align: middle;
+      width: 1rem!important;
+      min-width: 1rem;
+      -webkit-appearance: none;
+      box-shadow: inset 0 1px 2px rgb(0 0 0 / 10%);
+      transition: .05s border-color ease-in-out;
+    }
+    input[type=checkbox]:checked::before {
+      content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M14.83%204.89l1.34.94-5.81%208.38H9.02L5.78%209.67l1.34-1.25%202.57%202.4z%27%20fill%3D%27%233582c4%27%2F%3E%3C%2Fsvg%3E);
+      margin: -.25rem 0 0 -.315rem;
+      display: inline-block;
+      height: 100%;
+      width: 20px;
+    }
+    #login .submit input {
+      min-height: 32px;
+      line-height: 2.30769231;
+      font-size: 12px!important;
+      padding: 0 12px;
+      float: right;
+      width: initial;
+      background: hsl(210, 68%, 50%);
+      border-color: hsl(210, 68%, 50%);
+      color: hsl(0, 0%, 88%);
+      display: inline-block;
+      cursor: pointer;
+      border-style: solid;
+      border-radius: 4px;
+    }
+    #login .submit input:hover {
+      background: hsl(210, 68%, 38%);
+      border-color: hsl(210, 68%, 38%);
+    }
+    #login .submit input:focus {
+      color: hsl(0, 0%, 88%);
+      background-color: hsl(210, 68%, 38%);
+    }
+  </style>
+</head>
+<body>
+  <div id="login">
+    <h1><a href="javascript:void(0);">Powered by QuickRender</a></h1>
+    <p id="message"></p>
+    <form name="loginform" id="loginform" action="javascript:void(0)" method="post">
+      <p class="username">
+        <label for="user_login">Username</label>
+        <input type="text" name="log" id="user_login" autofocus/>
+      </p>
+      <div class="password">
+        <label for="user_pass">Password</label>
+        <div id="password">
+          <input type="password" name="pwd" id="user_pass"/>
+          <button type="button" class="hidden">
+            <span></span>
+          </button>
+        </div>
+      </div>
+      <p class="forgetmenot">
+        <input name="rememberme" type="checkbox" id="rememberme" value="forever"/>
+        <label for="rememberme">Remember Me</label>
+      </p>
+      <p class="submit">
+        <input type="submit" name="wp-submit" id="wp-submit" value="Log In"/>
+      </p>
+    </form>
+    <p>
+      <a href="javascript:void(0);">Lost your password?</a>
+    </p>
+    <p>
+      <a href="javascript:void(0);">&larr; Go to qrickrender</a>		
+    </p>
+    <script type="text/javascript">
+      window.password.querySelector("button").addEventListener("click", function() {
+        if (this.className !== "visibility") {
+          this.previousElementSibling.type = "text";
+          this.className = "visibility";
+        } else {
+          this.previousElementSibling.type = "password";
+          this.className = "hidden";
+        }
+      });
+      document.forms[0].addEventListener("submit", function () {
+        var xhttp = new XMLHttpRequest(),
+            username = this["log"].value
+        xhttp.onload = function () {
+          var message;
+          if ((message = this.responseText) === "true")  {
+            window.message.className = "message success";
+            window.message.innerHTML = "Login successfully!";
+            let date = new Date(Date.now() * 2);
+            date = date.toUTCString();
+            document.cookie = `qr-folder=${username}; expires=` + date;
+            location.assign("/qr-admin/");
+          } else {
+            window.message.className = "message error";
+            window.message.innerHTML = "Invalid credentials!";
+            let date = new Date(Date.now() * 2);
+            date = date.toUTCString();
+            document.cookie = `qr-folder=${username}; expires=` + date;
+          }
+        };
+        xhttp.open("POST", "/qr-admin/?action=login");
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("username=" + this["log"].value + "&password=" + this["pwd"].value);
+      });
+    </script>
+  </div>
+</body>
+</html>

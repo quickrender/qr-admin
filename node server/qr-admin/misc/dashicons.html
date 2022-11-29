@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="dashicons.css">
+<style>
+  body {
+    font-family: dashicons;
+    --num: "\f530";
+  }
+  p {
+    display: inline;
+  }
+  p:before {
+    content: var(--num);
+    
+  }
+</style>
+</head>
+<body>
+<script>
+  function f(a) {
+    return "<p style='--num: \"\\f" + a + "\";'>" + a + "</p> ";
+  }
+  var str  = "";
+  for (let i = 100; i < 548; i++) {
+    str += f(i);
+  }
+  document.body.innerHTML = str; 
+</script>
+</body>
+</html>
